@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="pb-6 grid grid-cols-4 gap-4 bg-gray-100">
+        <div class="col-span-1">
+            <form method="GET" action="{% url 'item:items' %}">
+                <input name="query" class="w-full py-4 px-6 border rounded-xl" type="text" value="{{ query}}" placeholder="Encuentra un producto...">
+                <button class="mt-2 py-4 px-8 text-lg bg-teal-500 text-white rounded-xl">Buscar</button>
+            </form>
+
+            <hr class="my-6">
+
+            <p class="font-bold">Categorias</p>
+
+            <ul>
+                {% for category in categories %}
+                    <li class="py-2 px-2 rounded-xl{% if category.id == category_id %} bg-gray-200 {% endif %}">
+                        <a href="{% url 'item:items' %}?query={{ query}}&category={{ category.id}}">{{ category.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <hr class="my-6">
+
+            <p class="font-bold">Limpiar Filtros</p>
+
+            <ul>
+                <li><a href="{% url 'item:items' %}" class="mt-2 py-4 px-8 inline-block bg-yellow-500 text-lg rounded-xl text-white">Limpiar</a></li>
+            </ul>
+        </div>
+
+        <div class="col-span-3">
+            <div class="grid grid-cols-3 gap-3">
+                {% for item in items %}
+                    <div>
+                        <a href="{% url 'item:detail' item.id %}">
+                            <div>
+                                <img src="{{ item.image.url}}" class="rounded-t-xl">
+                            </div>
+
+                            <div class="p-6 bg-white rounded-b-xl">
+                                <h2 class="text-2xl">{{ item.name }}</h2>
+                                <p class="text-gray-600">
+                                    Precio: 
+                                    {{ item.price|floatformat:2|cut:".00"|slice:":-3" }}
+                                    <span class="relative -top-0.5 text-xs">
+                                        {{ item.price|floatformat:2|slice:"-2:" }}
+                                    </span>
+                                </p>
+                                <p class="text-gray-500">Cantidad: {{ item.quantity_in_stock }}</p>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
