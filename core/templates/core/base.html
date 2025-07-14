@@ -8,21 +8,28 @@
     <title>{% block title%}{% endblock %} | DeLaFeria</title>
 </head>
 <body>
-    <nav class="py-6 px-6 flex justify-between items-center border-b border-gray-200">
-        <a href="{% url 'core:index' %}" class="text-xl font-semibold">DeLaFeria</a>
+    <nav class="py-6 px-6 flex justify-between items-center bg-orange-400 border-b border-orange-200 shadow-lg">
+        {% if request.user.is_authenticated %}
+        <!-- <a href="{% url 'core:index' %}" class="text-xl font-semibold">DeLaFeria</a> -->
+         <a href="{% url 'core:index' %}">
+            <img src="{% static 'images/home-button.png' %}" alt="DeLaFeria" class="h-12 hover:scale-110 transition-transform duration-200 shadow-2xl rounded-full" title='Inicio'>
+         </a>
+         {% else %}
+         <a href="{% url 'core:index' %}" class="text-xl font-semibold">DeLaFeria</a>
+         {% endif %}
         <div class="space-x-6">
             <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">Nuevo Producto</a>
             <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-500">Explorar</a>
 
             {% if request.user.is_authenticated %}
-                <a href="{% url 'conversation:inbox' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Bandeja</a>
+                <a href="{% url 'conversation:inbox' %}" class="px-6 py-3 text-lg font-semibold bg-green-600 text-white rounded-xl hover:bg-green-700">Bandeja</a>
                 <a href="{% url 'dashboard:index' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Panel</a>
                 <form method="post" action="{% url 'core:logout' %}" class="inline-block">
                     {% csrf_token %}
                     <button type="submit">Logout</button>
                 </form>
             {% else %}
-                <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Crear Cuenta</a>
+                <a href="{% url 'core:signup' %}" class="px-6 py-3 text-lg font-semibold bg-orange-700 text-white rounded-xl hover:bg-orange-400">Crear Cuenta</a>
                 <a href="{% url 'core:login' %}" class="px-6 py-3 text-lg font-semibold bg-gray-500 text-white rounded-xl hover:bg-gray-700">Iniciar Sesión</a>
             {% endif %}
         </div>
@@ -34,10 +41,10 @@
         {% endblock %}
     </div>
     
-    <footer class="py-6 px-6 flex justify-between bg-gray-800">
+    <footer class="py-6 px-6 flex justify-between bg-green-600">
         <div class="w-2/3 pr-10">
             <h3 class="mb-5 font-semibold text-gray-400">Acerca de</h3>
-            <p class="text-lg text-gray-500">DeLaFeria es una plataforma para comprar y vender productos de segunda mano, enfocada en la comunidad local.</p>
+            <p class="text-lg text-gray-200">DeLaFeria es una plataforma para comprar y vender productos de segunda mano, enfocada en la comunidad local.</p>
         </div>
         <div class="w-1/3">
             <h3 class="mb-5 font-semibold text-gray-400">Menu</h3>
