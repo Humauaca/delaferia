@@ -24,5 +24,6 @@
         "HTML (EEx)",
         "HTML (Eex)",
         "plist"
-    ]
+    ],
+    "tailwindCSS.suggestions": true
 }

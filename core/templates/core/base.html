@@ -18,7 +18,9 @@
          <a href="{% url 'core:index' %}" class="text-xl font-semibold">DeLaFeria</a>
          {% endif %}
         <div class="space-x-6">
-            <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">Nuevo Producto</a>
+            {% if request.user.is_authenticated and request.user.is_staff %}
+                <a href="{% url 'item:new' %}" class="text-lg font-semibold hover:text-gray-500">Nuevo Producto</a>
+            {% endif %}
             <a href="{% url 'item:items' %}" class="text-lg font-semibold hover:text-gray-500">Explorar</a>
 
             {% if request.user.is_authenticated %}

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from item import models
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 from . import forms
 from django.db.models import Q
 from django.views.decorators.cache import never_cache
@@ -35,6 +35,8 @@ def detail(request, pk):
         'related_items': related_items,
     })
 
+
+@user_passes_test(lambda u: u.is_staff)
 @never_cache
 @login_required # type: ignore
 def newItem(request):
