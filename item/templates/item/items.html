@@ -34,10 +34,10 @@
         <div class="col-span-3">
             <div class="grid grid-cols-3 gap-3">
                 {% for item in items %}
-                    <div>
+                    <div class="rounded-xl hover:scale-101 hover:shadow-sm transition-transform transition-shadow">
                         <a href="{% url 'item:detail' item.id %}">
                             <div>
-                                <img src="{{ item.image.url}}" class="rounded-t-xl">
+                                <img src="{{ item.image.url}}" class="w-full h-52 object-cover rounded-t-xl">
                             </div>
 
                             <div class="p-6 bg-white rounded-b-xl">
