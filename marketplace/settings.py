@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'core',
     'dashboard',
     'item',
+    'payments',
     #'storages' # Activate when use AWS
 ]
 

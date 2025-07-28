@@ -24,7 +24,8 @@ urlpatterns = [
     path('core/', include('core.urls', namespace='core')),
     path('item/', include('item.urls', namespace='item')),
     path('dashboard/', include('dashboard.urls', namespace='dashboard')),
-    path('inbox/', include('conversation.urls'))
+    path('inbox/', include('conversation.urls', namespace='conversation')),
+    path("payments/", include('payments.urls', namespace='payments')),
 ]
 
 if settings.DEBUG:
