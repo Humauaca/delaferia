@@ -5,7 +5,7 @@
 {% block content %}
   <div class="grid grid-cols-5 gap-6">
     <div class="col-span-3">
-        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="rounded-xl">
+        <img src="{{ item.image.url }}" alt="{{ item.name }}" class="w-full h-full object-cover rounded-t-xl">
     </div>
 
     <div class="col-span-2 p-6 bg-gray-100 rounded-xl">
@@ -29,7 +29,7 @@
             </div>
         {% else %}    
             <a href="{% url 'conversation:new' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-teal-500 text-white rounded-xl hover:bg-teal-700">Contactar al vendedor</a>
-            <a href="{% url 'payments:order' item.id%}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-orange-500 text-white rounded-xl hover:bg-orange-700">Comprar</a>
+            <a href="{% url 'payments:order' item.id %}" class="inline-block mt-6 px-6 py-3 text-lg font-semibold bg-orange-500 text-white rounded-xl hover:bg-orange-700">Comprar</a>
         {% endif %}
     </div>
   </div>
@@ -41,14 +41,14 @@
 
         <div class="grid grid-cols-3 gap-3">
             {% for item in related_items %}
-                <div>
-                    <a href="{% url 'item:detail' item.id %}">
-                        <div>
-                            <img src="{{ item.image.url }}" class="rounded-t-xl">
+                <div class="flex flex-col h-full">
+                    <a href="{% url 'item:detail' item.id %}" class="flex flex-col h-full">
+                        <div class="h-48 overflow-hidden">
+                            <img src="{{ item.image.url }}" class="w-full h-full object-cover rounded-t-xl">
                         </div>
 
-                        <div class="p-6 bg-white rounded-b-xl">
-                            <h2 class="text-2xl">{{ item.name }}</h2>
+                        <div class="p-6 bg-white rounded-b-xl flex-grow">
+                            <h2 class="text-2xl mb-2">{{ item.name }}</h2>
                             <p class="text-gray-600">
                                 Precio: 
                                 {{ item.price|floatformat:2|cut:".00"|slice:":-3" }}
